@@ -12,7 +12,6 @@ import androidx.compose.runtime.saveable.autoSaver
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,10 +19,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.e_rikshawbookingautomation.databinding.ActivityMapsBinding
+import com.example.e_rikshawbookingautomation.sendnotification.FirebaseService
 import com.google.android.gms.location.*
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -93,10 +95,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val firebaseAuth=FirebaseAuth.getInstance()
                     var email= firebaseAuth.currentUser?.email.toString()
                     email=email.replace('.',',')
+                    val name=firebaseAuth.currentUser?.displayName.toString()
+
+                    FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                        if(task.isSuccessful)
+                        {
+                            FirebaseService.token=task.result
+                        }
+                        else
+                        {
+                            Toast.makeText(this@MapsActivity,"Failed to Generate Token",Toast.LENGTH_SHORT).show()
+                            return@OnCompleteListener
+                        }
+                    })
+
+
                     val database=FirebaseDatabase.getInstance()
                     val databaseRef=database.reference
-                    val objOfLocationCordinates=LocationCordinates(location.latitude,location.longitude)
-                    databaseRef.child("UsersLocation").child(email).setValue(objOfLocationCordinates)
+                    val objOfLocationCordinates= FirebaseService.token?.let {
+                        LocationCordinates(name,
+                            it,location.latitude,location.longitude)
+                    }
+                    databaseRef.child("USERS").child(email).setValue(objOfLocationCordinates)
                     //databaseRef.child("UserLocation").setValue(objOfLocationCordinates)
                     if (location != null) {
                         val latLng = LatLng(location.latitude, location.longitude)
