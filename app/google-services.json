@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1083604959054",
+    "project_id": "e-rickshaw-automation",
+    "storage_bucket": "e-rickshaw-automation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083604959054:android:e74c2c23f593816e35a81f",
+        "android_client_info": {
+          "package_name": "com.example.e_rikshawbookingautomation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083604959054-mteg2orffv3thi8n7tgp4qpuke84pfta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo9MTximVw1toXT8t8DZ-cIfmvcAUbhvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083604959054-mteg2orffv3thi8n7tgp4qpuke84pfta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

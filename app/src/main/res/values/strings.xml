@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">E-Rikshaw Booking Automation</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string-array name="locations">
+        <item>Hostel A</item>
+        <item>Hostel B</item>
+        <item>Hostel c</item>
+        <item>Hostel E</item>
+        <item>Hostel G</item>
+        <item>Hostel H</item>
+        <item>Hostel I</item>
+        <item>Hostel J</item>
+        <item>Hostel K</item>
+        <item>Hostel L</item>
+        <item>Hostel M</item>
+        <item>Hostel N</item>
+        <item>Hostel O</item>
+        <item>COS Complex</item>
+        <item>Back Gate</item>
+        <item>Main Gate</item>
+        <item>Hostel PG</item>
+        <item>Main Audi</item>
+    </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
+</resources>
