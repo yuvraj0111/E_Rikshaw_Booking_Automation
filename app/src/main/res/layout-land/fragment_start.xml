@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".loginFragment.LoginFragment">
+
+
+        <ImageView
+            android:id="@+id/start_fragment_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/marco_mons_3h5silxnoxa_unsplash"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/login_button_margin_bottom"
+            android:text="@string/login"
+            app:backgroundTint="#D64040"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/welcome_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_top_margin"
+            android:text="@string/welcome"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/start_fragment_image" />
+
+        <TextView
+            android:id="@+id/below_welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/please_login_to_proceed_top_margin"
+            android:text="@string/please_login_to_proceed"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/please_login_to_proceed_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_text_view" />
+
+        <EditText
+            android:id="@+id/email_edit_text"
+            android:layout_width="@dimen/email_edit_text_width"
+            android:layout_height="@dimen/email_edit_text_height"
+            android:layout_marginTop="@dimen/email_edit_text_margin_top"
+            android:ems="10"
+            android:hint="@string/email_edit_text_hint"
+            android:inputType="textPersonName"
+            android:textColor="#FFFFFF"
+            android:padding="@dimen/email_edit_text_padding"
+            android:textColorHint="@color/white"
+            android:background="@drawable/border_styles"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/below_welcome_text" />
+
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="@dimen/password_edit_text_width"
+            android:layout_height="@dimen/password_edit_text_height"
+            android:layout_marginTop="@dimen/password_edit_text_margin_top"
+            android:ems="10"
+            android:hint="@string/password_edit_text_hint"
+            android:textColorHint="@color/white"
+            android:background="@drawable/border_styles"
+            android:padding="@dimen/passwordedit_text_padding"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/start_fragment_image"
+            app:layout_constraintStart_toStartOf="@+id/start_fragment_image"
+            app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/google_sign_in_button_height"
+            android:layout_marginTop="@dimen/google_sign_in_button_margin_top"
+            android:layout_marginEnd="@dimen/google_sign_in_button_margin_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or_text_view" />
+
+        <TextView
+            android:id="@+id/sign_in_with_google"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sign_in_with_google_text_height"
+            android:layout_marginStart="@dimen/sign_in_with_google_text_margin_start"
+            android:layout_marginTop="@dimen/sign_in_with_google_text_margin_top"
+            android:layout_marginEnd="@dimen/sign_in_with_google_text_margin_end"
+            android:text="@string/sign_in_with_google"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/sign_in_with_google_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/google_sign_in_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or_text_view" />
+
+        <TextView
+            android:id="@+id/dont_have_account"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/donthave_account_text_height"
+            android:layout_marginStart="@dimen/donthave_account_margin_start"
+            android:text="@string/dont_have_account"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/dont_have_account_text_size"
+            app:layout_constraintBaseline_toBaselineOf="@+id/register_button"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/register_button_height"
+            android:layout_marginTop="@dimen/register_button_margin_top"
+            android:layout_marginEnd="@dimen/register_button_margin_end"
+            android:backgroundTint="#6DD166"
+            android:text="@string/register_button_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dont_have_account"
+            app:layout_constraintTop_toBottomOf="@+id/google_sign_in_button" />
+
+        <TextView
+            android:id="@+id/or_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/or_text_view_margin_top"
+            android:text="@string/OR_string"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/or_text_view_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

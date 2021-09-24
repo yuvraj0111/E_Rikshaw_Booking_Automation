@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".loginFragment.RegisterFragment">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/marco_mons_3h5silxnoxa_unsplash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/register_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/register_text_margin_top"
+        android:text="@string/register_text"
+        android:textColor="#FFFEFE"
+        android:textSize="@dimen/register_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/enter_details_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/enter_details_text_margin_top"
+        android:text="@string/enter_your_details_text"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/enter_details_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_text" />
+
+    <EditText
+        android:id="@+id/full_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/first_name_height"
+        android:layout_marginStart="@dimen/first_name_margin_start"
+        android:layout_marginTop="@dimen/first_name_margin_top"
+        android:layout_marginEnd="@dimen/first_name_margin_end"
+        android:background="@drawable/border_styles"
+        android:ems="10"
+        android:hint="@string/full_name_hint"
+        android:inputType="textPersonName"
+        android:padding="@dimen/first_name_padding"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_details_text" />
+
+
+    <EditText
+        android:id="@+id/enter_email"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/email_height"
+        android:layout_marginStart="@dimen/email_margin_start"
+        android:layout_marginTop="@dimen/email_margin_top"
+        android:layout_marginEnd="@dimen/email_margin_end"
+        android:background="@drawable/border_styles"
+        android:ems="10"
+        android:hint="@string/email_hint"
+        android:inputType="textPersonName"
+        android:padding="@dimen/email_padding"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/full_name" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/password_height"
+        android:layout_marginStart="@dimen/password_margin_start"
+        android:layout_marginTop="@dimen/password_margin_top"
+        android:layout_marginEnd="@dimen/password_margin_end"
+        android:ems="10"
+        android:background="@drawable/border_styles"
+        android:hint="@string/password_hint"
+        android:textColorHint="@color/white"
+        android:padding="@dimen/password_padding"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_email" />
+
+    <TextView
+        android:id="@+id/or_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/or_text_margin_top"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="@string/OR_string"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/or_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+
+    <TextView
+        android:id="@+id/sign_up_with_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_with_google_margin_start"
+        android:layout_marginTop="@dimen/sign_up_with_google_margin_top"
+        android:layout_marginEnd="@dimen/sign_up_with_google_margin_end"
+        android:text="@string/sign_up_with_google"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/sign_up_with_google_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/google_sign_up_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/or_text" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_sign_up_button"
+        android:layout_width="@dimen/google_sign_up_button_width"
+        android:layout_height="@dimen/google_sign_up_button_height"
+        android:layout_marginTop="@dimen/google_sign_up_button_margin_top"
+        android:layout_marginEnd="@dimen/google_sign_up_button_margin_end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/or_text" />
+
+    <Button
+        android:id="@+id/submit_registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/submit_registration_margin_bottom"
+        android:text="@string/submit_registeration_string"
+        app:backgroundTint="#D64040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
