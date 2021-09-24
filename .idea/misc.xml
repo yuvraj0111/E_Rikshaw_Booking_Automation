@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/drawable-ldpi/ic_android_black_24dp.xml" value="0.2171875" />
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/drawable/border_styles.xml" value="0.2703125" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.23897435897435898" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout-land/activity_booking.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout-land/activity_maps.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout-land/fragment_register.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout-land/fragment_start.xml" value="0.2019400352733686" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout-land/loading_spinner.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout-land/loading_spinner_for_registering.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout-land/nav_header.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/action_bar.xml" value="0.234375" />
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/activity_booking.xml" value="0.264" />
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/activity_main.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/activity_maps.xml" value="0.1765625" />
@@ -13,6 +23,10 @@
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/fragment_logout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/fragment_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/fragment_start.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/loading_spinner.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/loading_spinner_for_registering.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/nav_header.xml" value="0.25" />
+        <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/layout/simple_loading_spinner.xml" value="0.1984375" />
         <entry key="..\:/Users/JERRY/AndroidStudioProjects/ERikshawBookingAutomation/app/src/main/res/menu/overflow_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

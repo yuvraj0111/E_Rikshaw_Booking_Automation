@@ -1,6 +1,7 @@
 package com.example.e_rikshawbookingautomation.loginFragment
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -46,6 +50,9 @@ class StartFragment : Fragment() {
     lateinit var binding:FragmentStartBinding
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var dialog:Dialog
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,27 +61,27 @@ class StartFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_start,container,false)
 
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_start,container,false)
        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("1083604959054-43th3co7arldu77mb1r6qb9jj57f6jc1.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
+           dialog= Dialog(requireActivity())
+
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
-
+     //  Log.d("progessbar","value of progress bar is $progessBar")
         firebaseAuth= FirebaseAuth.getInstance()
         db= FirebaseFirestore.getInstance()
 
         binding.loginButton.setOnClickListener{
-
+            dialog.startloading()
             if(checking()) // Checking wheather user has filled ID and Password or not.
             {
                 val email=binding.emailEditText.text.toString()
@@ -87,18 +94,27 @@ class StartFragment : Fragment() {
                             val intent=Intent(requireActivity(),Booking::class.java)
                             intent.putExtra("Email",email)
                             startActivity(intent)
+                            dialog.dismissSignInDialog()
+                            requireActivity().finish()
+
                         }
-                            else
-                            Toast.makeText(requireActivity(),"Login Failed", Toast.LENGTH_LONG).show()
+                            else {
+                            Toast.makeText(requireActivity(), "Login Failed", Toast.LENGTH_LONG)
+                                .show()
+                            dialog.dismissSignInDialog()
+                        }
                     }
                     .addOnFailureListener{
                         Toast.makeText(requireActivity(),"User Id and Password not registered",Toast.LENGTH_LONG).show()
+                        dialog.dismissSignInDialog()
                     }
             }
             else
             {
                 Toast.makeText(requireActivity(),"Please Enter Login ID and Password",Toast.LENGTH_LONG).show()
+                dialog.dismissSignInDialog()
             }
+            //dialog.dismissSignInDialog()
         }
 
         binding.registerButton.setOnClickListener { view:View ->
@@ -109,6 +125,7 @@ class StartFragment : Fragment() {
         binding.googleSignInButton.setOnClickListener {
             val intent = mGoogleSignInClient.signInIntent
             resultLauncher.launch(intent)
+//            dialog.startloading()
         }
 
         return binding.root
@@ -125,7 +142,9 @@ class StartFragment : Fragment() {
     }
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
         if (result.resultCode == Activity.RESULT_OK) {
+            dialog.startloading()
 
             //Toast.makeText(requireContext(),"Login Succesfull",Toast.LENGTH_SHORT).show()
             // There are no request codes
@@ -174,9 +193,12 @@ class StartFragment : Fragment() {
                 val intent=Intent(requireActivity(),Booking::class.java)
                 intent.putExtra("Email",email)
                 startActivity(intent)
+                dialog.dismissSignInDialog()
+                requireActivity().finish()
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_SHORT).show()
+                dialog.dismissSignInDialog()
             }
 
     }

@@ -17,10 +17,10 @@
         android:id="@+id/done_button_on_google_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="@dimen/done_button_on_google_map_margin_bottom"
         android:backgroundTint="#000000"
         android:visibility="invisible"
-        android:text="Done"
+        android:text="@string/done_button_on_google_map_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

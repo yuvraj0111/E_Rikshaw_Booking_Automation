@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.e_rikshawbookingautomation.Booking
+import com.example.e_rikshawbookingautomation.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlin.random.Random
@@ -20,7 +21,7 @@ private const val CHANNEL_ID = "my_channel"
 class FirebaseService:FirebaseMessagingService()
 {
     companion object{
-        var token:String?=null
+        var token:String? = null
 
     }
 
@@ -33,7 +34,7 @@ class FirebaseService:FirebaseMessagingService()
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        Toast.makeText(this,"Message Received", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this,"Message Received", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, Booking::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()
@@ -47,6 +48,7 @@ class FirebaseService:FirebaseMessagingService()
         val notification= NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["message"])
+            .setSmallIcon(R.drawable.ic_android_black_24dp)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()

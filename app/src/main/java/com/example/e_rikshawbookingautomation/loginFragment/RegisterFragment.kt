@@ -43,6 +43,7 @@ class RegisterFragment : Fragment() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+    private lateinit var dialog:Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,20 +65,21 @@ class RegisterFragment : Fragment() {
             .requestEmail()
             .build()
 
+         dialog=Dialog(requireActivity())
+
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
          firebaseAuth= FirebaseAuth.getInstance()
            db= FirebaseFirestore.getInstance()
         binding.submitRegistration.setOnClickListener {
+            dialog.registerloading()
             if(checking())
             {
-                val firstName=binding.firstName.text.toString()
-                val lastName=binding.lastName.text.toString()
+                val fullName=binding.fullName?.text.toString()
                 val email=binding.enterEmail.text.toString()
                 val password=binding.editTextTextPassword.text.toString()
 
                 val user= hashMapOf(
-                    "First Name" to firstName,
-                   "Last Name" to lastName,
+                    "Name" to fullName,
                      "Email" to email
                 )
 
@@ -91,17 +93,22 @@ class RegisterFragment : Fragment() {
                                     if(task.isSuccessful)
                                     {
                                         users.document(email).set(user)
+                                        dialog.dismissRegisterDialog()
                                         Toast.makeText(requireActivity(),"User Registered with $email", Toast.LENGTH_SHORT).show()
                                         Toast.makeText(requireActivity(),"Please Login now to continue", Toast.LENGTH_SHORT).show()
                                         this.findNavController().navigate(R.id.action_registerFragment_to_startFragment)
 
                                     }
                                         else
+                                    {
                                         Toast.makeText(requireActivity(),"Registration Failed", Toast.LENGTH_LONG).show()
+                                        dialog.dismissRegisterDialog()
+                                        }
                                 }
                         }
                         else
                         {
+                            dialog.dismissRegisterDialog()
                             Toast.makeText(requireContext(), "User Already Exists with $email", Toast.LENGTH_SHORT)
                                 .show()
                             Toast.makeText(requireActivity(),"Please Login", Toast.LENGTH_SHORT).show()
@@ -114,25 +121,28 @@ class RegisterFragment : Fragment() {
             else
             {
                 Toast.makeText(requireActivity(),"Please Enter the details correctly", Toast.LENGTH_LONG).show()
+                dialog.dismissRegisterDialog()
             }
+
         }
 
         binding.googleSignUpButton.setOnClickListener {
+            val dialog=Dialog(requireActivity())
+            dialog.startloading()
             val intent = mGoogleSignInClient.signInIntent
             resultLauncher.launch(intent)
+//            dialog.startloading()
         }
 
         return binding.root
     }
 
     private fun checking():Boolean{
-        val firstName=binding.firstName.text.toString()
-        val lastName=binding.lastName.text.toString()
+        val fullName=binding.fullName?.text.toString()
         val email=binding.enterEmail.text.toString()
         val password=binding.editTextTextPassword.text.toString()
 
-        if(firstName.trim {it<=' '}.isNotEmpty()
-            && lastName.trim {it<=' '}.isNotEmpty()
+        if(fullName.trim {it<=' '}.isNotEmpty()
             && email.trim {it<=' '}.isNotEmpty()
             && password.trim {it<=' '}.isNotEmpty()
         )
@@ -143,6 +153,7 @@ class RegisterFragment : Fragment() {
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
+            dialog.startloading()
 
             //Toast.makeText(requireContext(),"Login Succesfull",Toast.LENGTH_SHORT).show()
             // There are no request codes
@@ -192,10 +203,13 @@ class RegisterFragment : Fragment() {
                 val intent=Intent(requireActivity(), Booking::class.java)
                 intent.putExtra("Email",email)
                 startActivity(intent)
+                dialog.dismissSignInDialog()
+                requireActivity().finish()
 
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Registration Failed", Toast.LENGTH_SHORT).show()
+                dialog.dismissSignInDialog()
             }
 
     }

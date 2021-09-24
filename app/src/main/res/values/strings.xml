@@ -3,7 +3,48 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open">Open</string>
+    <string name="login">Login</string>
+    <string name="welcome">Welcome</string>
     <string name="close">Close</string>
+
+    <!--Start Fragment -->
+    <string name="please_login_to_proceed">Please Login to Proceed</string>
+    <string name="email_edit_text_hint">Email Address</string>
+    <string name="password_edit_text_hint">Password</string>
+    <string name="dont_have_account">Don\'t Have Account?</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="register_button_text">Register Here</string>
+    <string name="OR_string">OR</string>
+
+    <!-- Register Fragment -->
+    <string name="register_text">Register</string>
+    <string name="enter_your_details_text">Enter Your Details</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="email_hint">Email Address</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_up_with_google">Sign Up with Google</string>
+    <string name="submit_registeration_string">Register</string>
+
+    <!--maps activity -->
+    <string name="done_button_on_google_map_text">Done</string>
+
+
+    <!--Booking Activity -->
+    <string name="toolbar_title">Home</string>
+    <string name="enter_your_location">Enter Your Location</string>
+    <string name="enter_your_location_on_google_map">Enter Location through Google Map</string>
+    <string name="google_maps">Google Maps</string>
+
+
+    <!--loading spinner for login fragment -->
+    <string name="signing_in">Signing in....</string>
+    <string name="registering">Registering....</string>
+    <string name="please_wait">Please Wait....</string>
+
+    <string name="locate_driver">See Driver Location</string>
+
+
     <string-array name="locations">
         <item>Hostel A</item>
         <item>Hostel B</item>
@@ -25,4 +66,5 @@
         <item>Main Audi</item>
     </string-array>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_driver">DriverActivity</string>
 </resources>
