@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -27,9 +28,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.type.LatLng
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -42,10 +41,12 @@ class SendRequest : AppCompatActivity() {
     private lateinit var geocoder: Geocoder
     private lateinit var simpleLoading:Dialog
     private lateinit var db:FirebaseFirestore
+    private lateinit var seelocationbutton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_request)
 
+        seelocationbutton=findViewById(R.id.see_driver_location)
         simpleLoading= Dialog(this)
         simpleLoading.simpleloading()
 
@@ -90,7 +91,7 @@ class SendRequest : AppCompatActivity() {
         val driverInfo=findViewById<TextView>(R.id.driver_info)
         geocoder= Geocoder(this, Locale.getDefault())
 
-        var driverName:String="No Cab Available"
+      //  var driverName:String="No Cab Available"
         var resEmail:String="No One"
         var maxDistance=100000
        val lati=intent.extras?.getDouble("Latitude")
@@ -147,7 +148,51 @@ class SendRequest : AppCompatActivity() {
 
                  */
 
-                driverName = getDriverName(resEmail)
+
+
+//                 fun main() = runBlocking {
+//
+//                     val job: Job = launch {
+//                    driverName = getDriverName(resEmail)
+//                         Log.i("driverName",driverName)
+//                }
+//                     job.join()
+//                }
+
+
+
+
+                binding.seeDriverLocation.visibility= View.VISIBLE
+
+                seelocationbutton.setOnClickListener{
+                    val intent=Intent(this@SendRequest,DriverActivity::class.java)
+                    intent.putExtra("EmailOfDriver",resEmail)
+                    startActivity(intent)
+                }
+
+
+                val extraInfo = "Your Request is sent Successfully!!\n " +
+                        "Nearest Cab is at $maxDistance meter away from you\n"
+
+                driverInfo.text = extraInfo
+                val title = "New Passenger"
+                val message = "$nameOfPassenger is waiting"
+                Toast.makeText(
+                    this@SendRequest,
+                    "Request Sent Successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //FirebaseMessaging.getInstance().subscribeToTopic(Topic)
+                PushNotification(
+                    NotificationData(title, message, useremail!!),
+                    recipientToken
+                ).also {
+                    sendNotification(it)
+                }
+
+                simpleLoading.dismissSimpleDialog()
+
+
 
 //                if (driverName == "Not Available") {
 //                    val noCab = "No Cab is Available Right Now"
@@ -155,34 +200,7 @@ class SendRequest : AppCompatActivity() {
 //                }
 
                // else {
-                      binding.seeDriverLocation.visibility= View.VISIBLE
-                    val extraInfo = "Your Request is sent Successfully!!\n " +
-                            "Nearest Cab is at ($maxDistance)m away from you\n" +
-                            "$driverName will be there to pickup you\n"
 
-                    driverInfo.text = extraInfo
-                    val title = "New Passenger"
-                    val message = "$nameOfPassenger is waiting"
-                    Toast.makeText(
-                        this@SendRequest,
-                        "Request Sent Successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    //FirebaseMessaging.getInstance().subscribeToTopic(Topic)
-                    PushNotification(
-                        NotificationData(title, message, useremail!!),
-                        recipientToken
-                    ).also {
-                        sendNotification(it)
-                    }
-
-                     simpleLoading.dismissSimpleDialog()
-
-                    binding.seeDriverLocation.setOnClickListener{
-                             val intent=Intent(this@SendRequest,DriverActivity::class.java)
-                        intent.putExtra("EmailOfDriver",resEmail)
-                       startActivity(intent)
-                    }
                 //}
             }
 
@@ -194,6 +212,9 @@ class SendRequest : AppCompatActivity() {
         })
 
     }
+
+
+    /*
 
     private fun getDriverName( resEmail: String): String
     {
@@ -211,6 +232,8 @@ class SendRequest : AppCompatActivity() {
             }
         return DriverName
     }
+
+     */
 
     fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
 //         val response =RetrofitInstance.api.postNotification(notification)

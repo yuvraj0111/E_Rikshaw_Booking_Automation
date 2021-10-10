@@ -1,6 +1,8 @@
 package com.example.e_rikshawbookingautomation
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,12 +34,48 @@ class Booking : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var simpleDialog:Dialog
+    private lateinit var sharedpref:SharedPreferences
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         setSupportActionBar(findViewById(R.id.action_bar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-       binding= DataBindingUtil.setContentView(this,R.layout.activity_booking)
+
+         sharedpref=this?.getPreferences(Context.MODE_PRIVATE)?:return
+        val isLogin=sharedpref.getString("Email","1")
+
+        if(isLogin=="1")
+        {
+            val sharedEmail=intent.getStringExtra("Email")
+
+            if(sharedEmail!=null)
+            {
+                action()
+                with(sharedpref.edit())
+                {
+                    putString("Email", sharedEmail)
+                    apply()
+                }
+            }
+
+            else
+            {
+                val intent=Intent(this,MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+        else
+        {
+            action()
+        }
+
+    }
+
+    private fun action() {
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_booking)
         simpleDialog= Dialog(this)
         firebaseAuth= FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,12 +86,12 @@ class Booking : AppCompatActivity() {
         val db= FirebaseFirestore.getInstance()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-         binding.googleMapsButton.setOnClickListener {
-             val intent=Intent(this,MapsActivity::class.java)
-             startActivity(intent)
-         }
+        binding.googleMapsButton.setOnClickListener {
+            val intent=Intent(this,MapsActivity::class.java)
+            startActivity(intent)
+        }
 
-         val user=firebaseAuth.currentUser
+        val user=firebaseAuth.currentUser
         val drawayerLayout=binding.drawerLayout
         val navView=binding.navViewId
         //toogle= ActionBarDrawerToggle(this,drawayerLayout,R.string.open,R.string.close)
@@ -62,7 +100,7 @@ class Booking : AppCompatActivity() {
         toogle.isDrawerIndicatorEnabled=true
         toogle.syncState()
 
-         supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         val headerView=navView.getHeaderView(0)
         val userNameTextView=headerView.findViewById<TextView>(R.id.username)
         val userEmailId=headerView.findViewById<TextView>(R.id.useremail)
@@ -70,7 +108,7 @@ class Booking : AppCompatActivity() {
 
         val provider=FirebaseAuth.getInstance().getAccessToken(false).getResult().signInProvider
         if(provider=="google.com")
-        userNameTextView.text=user?.displayName.toString()
+            userNameTextView.text=user?.displayName.toString()
 
         if(provider=="password")
         {
@@ -96,6 +134,7 @@ class Booking : AppCompatActivity() {
             {
                 R.id.logout ->
                 {
+                    sharedpref.edit().remove("Email").apply()
                     simpleDialog.simpleloading()
                     val email = getIntent().extras?.getString("Email")
                     mGoogleSignInClient.signOut()
@@ -108,7 +147,6 @@ class Booking : AppCompatActivity() {
             }
             true
         }
-
 
     }
 

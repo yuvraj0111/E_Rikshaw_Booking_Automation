@@ -42,7 +42,7 @@
         android:layout_marginTop="@dimen/see_driver_location_margin_top"
         android:backgroundTint="#312E85"
         android:text="@string/locate_driver"
-        android:visibility="gone"
+        tools:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/driver_info" />
