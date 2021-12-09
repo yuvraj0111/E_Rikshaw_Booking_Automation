@@ -92,11 +92,25 @@ class RegisterFragment : Fragment() {
                                 .addOnCompleteListener(requireActivity()){ task ->
                                     if(task.isSuccessful)
                                     {
-                                        users.document(email).set(user)
-                                        dialog.dismissRegisterDialog()
-                                        Toast.makeText(requireActivity(),"User Registered with $email", Toast.LENGTH_SHORT).show()
-                                        Toast.makeText(requireActivity(),"Please Login now to continue", Toast.LENGTH_SHORT).show()
-                                        this.findNavController().navigate(R.id.action_registerFragment_to_startFragment)
+                                      firebaseAuth.currentUser?.sendEmailVerification()?.addOnCompleteListener{task ->
+                                          if(task.isSuccessful)
+                                          {
+                                              dialog.dismissRegisterDialog()
+                                              Toast.makeText(requireActivity(),"Email Verification link has been sent to your " +
+                                                      "Email",Toast.LENGTH_LONG).show()
+                                              this.findNavController().navigate(R.id.action_registerFragment_to_startFragment)
+                                          }
+                                          else
+                                          {
+                                              dialog.dismissRegisterDialog()
+                                              Toast.makeText(requireActivity(),"Sign Up Failed!",Toast.LENGTH_LONG).show()
+                                          }
+                                      }
+//                                        users.document(email).set(user)
+//                                        dialog.dismissRegisterDialog()
+//                                        Toast.makeText(requireActivity(),"User Registered with $email", Toast.LENGTH_SHORT).show()
+//                                        Toast.makeText(requireActivity(),"Please Login now to continue", Toast.LENGTH_SHORT).show()
+//                                        this.findNavController().navigate(R.id.action_registerFragment_to_startFragment)
 
                                     }
                                         else

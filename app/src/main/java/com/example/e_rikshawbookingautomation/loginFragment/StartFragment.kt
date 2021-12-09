@@ -88,14 +88,34 @@ class StartFragment : Fragment() {
                 val password=binding.passwordEditText.text.toString()
                 firebaseAuth.signInWithEmailAndPassword(email,password)
                     .addOnCompleteListener(requireActivity()){ task ->
-                        if(task.isSuccessful)
-                        {
+                        if(task.isSuccessful) {
+                            if (firebaseAuth.currentUser?.isEmailVerified == true) {
+                                val name = firebaseAuth.currentUser?.displayName.toString()
+                                val user = hashMapOf(
+                                    "Name" to name,
+                                    "Email" to email
+                                )
+
+                                val users = db.collection("USERS")
+                                val query = users.whereEqualTo("Email", email).get()
+                                    .addOnSuccessListener { it ->
+                                        if (it.isEmpty) {
+                                            users.document(email).set(user)
+                                        }
+                                    }
+
                         Toast.makeText(requireActivity(),"Login Successfull",Toast.LENGTH_LONG).show()
                             val intent=Intent(requireActivity(),Booking::class.java)
                             intent.putExtra("Email",email)
                             startActivity(intent)
                             dialog.dismissSignInDialog()
                             requireActivity().finish()
+                                }
+                            else
+                            {
+                                dialog.dismissSignInDialog()
+                                Toast.makeText(requireActivity(),"Email not verified",Toast.LENGTH_LONG).show()
+                            }
 
                         }
                             else {
